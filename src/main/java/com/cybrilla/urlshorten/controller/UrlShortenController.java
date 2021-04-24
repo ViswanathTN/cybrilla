@@ -9,10 +9,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+
 
 import com.cybrilla.urlshorten.dataaccess.LongUrlRepository;
 import com.cybrilla.urlshorten.dataaccess.UrlShortenRepository;
@@ -58,6 +59,35 @@ public class UrlShortenController {
 		
 	}
 	
+	@RequestMapping(method=RequestMethod.GET, value = "/urls/{shorturl}")
+	public ResponseEntity<Object> shortToLongUrl(@PathVariable("shorturl") String shortUrlReq) {
+		System.out.println("shortUrlReq - "+shortUrlReq);
+		UrlService urlService= new UrlService();
+		long originalId=urlService.decode(shortUrlReq);
+		System.out.println("Optional-id"+originalId);
+		originalId +=1;
+		System.out.println("Optional-id"+originalId);
+		
+		Optional<UrlLink> urllink=urlShortenRepository.findById(originalId);
+		if(urllink.isPresent()) {
+			UrlLink getUrlData=urllink.get();
+			String urlstr=getUrlData.getUrl();
+			System.out.println("Optional-urllink.get()"+getUrlData.getUrl());
+			return ResponseEntity.status(HttpStatus.FOUND)
+	                .location(URI.create(urlstr))
+	                .build();
+
+		}else {
+			
+			return ResponseEntity.badRequest().build();
+
+		}
+//		System.out.println("Optional-urllink"+urllink);
+//		System.out.println("optional_1"+urllink.toString());
+		
+		
+	}
+
 	@RequestMapping(method=RequestMethod.POST, value = "/shorturl", consumes = "application/json")
 	public ResponseEntity<Object> shortToLongUrl(@RequestBody Url url) {
 		
@@ -87,5 +117,4 @@ public class UrlShortenController {
 		
 		
 	}
-
 }
