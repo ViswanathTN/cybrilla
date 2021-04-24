@@ -24,3 +24,13 @@ Request Body
 {
 	"url":"b"
 }
+-------------------*******************-------------------------------
+In Url you can pass the shorturl like
+
+http://localhost:8070/urls/b
+
+Note:After /urls/"shorturl"
+In "short url" you need to provide the short urls
+-------------------*******************-------------------------------
+I have you the H2 in memmory database
+
