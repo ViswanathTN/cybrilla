@@ -1,0 +1,26 @@
+SameRequest
+
+http://localhost:8070/urls 
+
+POST Method
+------------
+Request Body
+{
+	"url":"www.google.com"
+}
+-------------------*******************-------------------------------
+http://localhost:8070/urls 
+
+GET Method
+----------
+You will get the responce In Browser with all the urls
+-------------------*******************-------------------------------
+http://localhost:8070/shorturl
+
+Note:Depends on the available url we need to provide in the request body. To Check you can use above GET url.
+POST Method
+------------
+Request Body
+{
+	"url":"b"
+}

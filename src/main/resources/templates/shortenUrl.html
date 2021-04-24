@@ -1,0 +1,21 @@
+<html>
+<head>
+<title>Url Shorten</title>
+</head>
+<body>
+<h2>Url List</h2>
+<table border="2px">
+<thead>
+<tr>
+<th>Url</th>
+<th>Short Url</th>
+</tr></thead>
+<tbody>
+<tr th:each="url : ${urls}">
+<td  th:text="${url.url}"></td>
+<td th:text="${url.shortUrl}" ><a href="th:text="${url.url}"" /></td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>
